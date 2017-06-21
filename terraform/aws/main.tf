@@ -1,0 +1,1 @@
+resoource "aws_vpc"
