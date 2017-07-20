@@ -1,0 +1,19 @@
+- name: create ec2 instance
+  ec2:
+    state: present
+    aws_access_key: "{{ AWS_ACCESS_KEY_TEST }}"
+    aws_secret_key: "{{ AWS_SECRET_TEST }}"
+    region: "{{ AWS_REGION_TEST }}"
+    key_name: id_rsa
+    instance_type: t2.micro
+    instance_ids:
+    image: ami-3bd3c45c
+    count: 1
+    group: wordpress-test
+    instance_tags:
+      Name: test-ansible
+    volumes:
+      - device_name: /dev/xvda
+        volume_type: gp2
+        volume_size: 8
+  register: ec2
