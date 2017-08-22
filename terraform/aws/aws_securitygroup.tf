@@ -1,7 +1,7 @@
 resource "aws_security_group" "web" {
   name = "web"
   description = "web"
-  vpc_id = "$(aws_vpc.vtryo_vpc.id)"
+  vpc_id = "${aws_vpc.vtryo_vpc.id}"
   ingress {
     from_port = 80
     to_port = 80
@@ -14,11 +14,11 @@ resource "aws_security_group" "web" {
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress {
+  egress {
     from_port = 0
     to_port = 0
-    protocol = -1
-    cidr_blocks = [""]
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   tags {
     Name = "web"
