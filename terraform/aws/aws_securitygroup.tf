@@ -1,4 +1,4 @@
-resouce "aws_security_group" "web" {
+resource "aws_security_group" "web" {
   name = "web"
   description = "web"
   vpc_id = "$(aws_vpc.vtryo_vpc.id)"
