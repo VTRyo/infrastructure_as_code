@@ -1,0 +1,18 @@
+- name: change instance-type
+  ec2:
+    state: present
+    aws_access_key: "{{ AWS_ACCESS_KEY_TEST }}"
+    aws_secret_key: "{{ AWS_SECRET_TEST }}"
+    region: "{{ AWS_REGION_TEST }}"
+    instance_ids: "{{ instance_id_test-ansible }}"
+    key_name: id_rsa
+    instance_type: t2.small
+    count: 1
+    group: wordpress-test
+    instance_tags:
+      Name: test-ansible
+    volumes:
+      - device_name: /dev/xvda
+        volume_type: gp2
+        volume_size: 8
+  register: ec2

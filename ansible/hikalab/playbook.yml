@@ -1,0 +1,4 @@
+- hosts: testserver
+  become: True
+  roles:
+    - change-instance
