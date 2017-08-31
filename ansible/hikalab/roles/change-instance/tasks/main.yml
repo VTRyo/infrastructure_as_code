@@ -4,9 +4,10 @@
     aws_access_key: "{{ AWS_ACCESS_KEY_TEST }}"
     aws_secret_key: "{{ AWS_SECRET_TEST }}"
     region: "{{ AWS_REGION_TEST }}"
-    instance_ids: "{{ instance_id_test-ansible }}"
+    instance_ids: "{{ instance_id_test_ansible }}"
     key_name: id_rsa
-    instance_type: t2.small
+    instance_type: t2.micro
+    image: ami-4af5022c
     count: 1
     group: wordpress-test
     instance_tags:
