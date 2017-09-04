@@ -1,0 +1,55 @@
+- name: create vpc
+  ec2_vpc_net:
+    aws_access_key: "{{ AWS_ACCESS_KEY_TEST }}"
+    aws_secret_key: "{{ AWS_SECRET_TEST }}"
+    region: "{{ AWS_REGION_TEST }}"
+    name: ansible-vpc
+    state: present
+    cidr_block: 12.0.0.0/16
+    tenancy: default
+  register: vpc_net
+
+- name: get vpc_id
+  ec2_vpc_net_facts:
+    aws_access_key: "{{ AWS_ACCESS_KEY_TEST }}"
+    aws_secret_key: "{{ AWS_SECRET_TEST }}"
+    region: "{{ AWS_REGION_TEST }}"
+    region: "{{ AWS_REGION_TEST }}"
+    filters:
+       "tag:Name": ansible-vpc
+  register: vpc_net_fact
+
+- debug:
+    var: vpc_net_fact
+
+- name: create subnet a
+  ec2_vpc_subnet:
+    aws_access_key: "{{ AWS_ACCESS_KEY_TEST }}"
+    aws_secret_key: "{{ AWS_SECRET_TEST }}"
+    region: "{{ AWS_REGION_TEST }}"
+    state: present
+    vpc_id: "{{  vpc_net_fact.vpcs[0].id }}"
+    az: "{{ AWS_REGION_TEST }}a"
+    cidr: 12.0.0.0/24
+    resource_tags:
+      Name: ansible_subnet_a
+  register: ansible_subnet_a
+
+- name: create subnet c
+  ec2_vpc_subnet:
+    aws_access_key: "{{ AWS_ACCESS_KEY_TEST }}"
+    aws_secret_key: "{{ AWS_SECRET_TEST }}"
+    region: "{{ AWS_REGION_TEST }}"
+    state: present
+    vpc_id: "{{  vpc_net_fact.vpcs[0].id }}"
+    az: "{{ AWS_REGION_TEST }}c"
+    cidr: 12.0.1.0/24
+    resource_tags:
+      Name: ansible_subnet_c
+  register: ansible_subnet_c
+
+- debug:
+    var: ansible_subnet_a
+
+- debug:
+    var: ansible_subnet_c

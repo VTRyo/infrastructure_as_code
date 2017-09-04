@@ -1,0 +1,12 @@
+- name: create rds
+  rds:
+    aws_access_key: "{{ AWS_ACCESS_KEY_TEST }}"
+    aws_secret_key: "{{ AWS_SECRET_TEST }}"
+    region: "{{ AWS_REGION_TEST }}"
+    command: create
+    instance_name: test-ansible-rds
+    db_engine: MySQL
+    size: 5
+    instance_type: db.t2.micro
+    username: hoge
+    password: "{{ rds_password }}"
