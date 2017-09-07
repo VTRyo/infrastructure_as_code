@@ -2,3 +2,5 @@
   become: True
   roles:
     - vpc-build
+    - group-build
+    - ec2-build

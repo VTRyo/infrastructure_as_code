@@ -1,0 +1,40 @@
+##securitygroup
+##boto + boto3が必要
+- name: create ec2 group
+  ec2_group:
+    aws_access_key: "{{ aws_access_key_id }}"
+    aws_secret_key: "{{ aws_secret_access_key }}"
+    region: "{{ AWS_REGION }}"
+    name: ansible-group
+    description: ansible for AWS
+    vpc_id: "{{ vpc_net_fact_id.vpcs[0].id }}"
+    state: present
+    rules:
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 443
+        to_port: 443
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 12.0.0.0/16
+  register: ansible-group
+##groupへのtagは2.4以降から
+## http://docs.ansible.com/ansible/latest/ec2_group_module.html
+
+##作業マシン内にbotoが必要
+- name: get group id
+  ec2_group_facts:
+    aws_access_key: "{{ aws_access_key_id }}"
+    aws_secret_key: "{{ aws_secret_access_key }}"
+    region: "{{ AWS_REGION }}"
+    filters:
+      group-name: ansible-group
+  register: group
+
+- debug:
+    var: group

@@ -11,7 +11,10 @@
     count: 1
     group: wordpress-test
     instance_tags:
-      Name: test-ansible
+      Name: "{{ instance_name }}"
+    count_tag:
+      Name: "{{ instance_name }}"
+    exact_count: 1
     volumes:
       - device_name: /dev/xvda
         volume_type: gp2

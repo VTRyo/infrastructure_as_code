@@ -1,4 +1,5 @@
 ## VPC
+##作業マシン内にbotoが必要
 - name: create vpc
   ec2_vpc_net:
     aws_access_key: "{{ aws_access_key_id }}"
@@ -23,6 +24,7 @@
     var: vpc_net_fact_id
 
 ## subnet
+##作業マシン内にbotoが必要
 - name: create subnet a
   ec2_vpc_subnet:
     aws_access_key: "{{ aws_access_key_id }}"
@@ -74,6 +76,7 @@
     var: ansible_subnet_c_id
 
 ##internet gateway
+##作業マシン内にbotoが必要
 - name: create gateway
   ec2_vpc_igw:
     aws_access_key: "{{ aws_access_key_id }}"
@@ -83,7 +86,8 @@
     state: present
   register: igw
 
-## route
+##route table
+##作業マシン内にbotoが必要
 - name: create route table
   ec2_vpc_route_table:
     aws_access_key: "{{ aws_access_key_id }}"
