@@ -3,7 +3,7 @@
     state: present
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     instance_ids: "{{ instance_id_test_ansible }}"
     key_name: id_rsa
     instance_type: t2.micro
