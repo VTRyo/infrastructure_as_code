@@ -4,7 +4,7 @@
   ec2_vpc_net:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     name: ansible-vpc
     state: present
     cidr_block: 12.0.0.0/16
@@ -15,7 +15,7 @@
   ec2_vpc_net_facts:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     filters:
        "tag:Name": ansible-vpc
   register: vpc_net_fact_id
@@ -29,10 +29,10 @@
   ec2_vpc_subnet:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     state: present
     vpc_id: "{{  vpc_net_fact_id.vpcs[0].id }}"
-    az: "{{ AWS_REGION }}a"
+    az: "{{ aws_region }}a"
     cidr: 12.0.0.0/24
     resource_tags:
       Name: ansible_subnet_a
@@ -42,7 +42,7 @@
   ec2_vpc_subnet_facts:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     filters:
       "tag:Name": ansible_subnet_a
   register: ansible_subnet_a_id
@@ -51,10 +51,10 @@
   ec2_vpc_subnet:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     state: present
     vpc_id: "{{  vpc_net_fact_id.vpcs[0].id }}"
-    az: "{{ AWS_REGION }}c"
+    az: "{{ aws_region }}c"
     cidr: 12.0.1.0/24
     resource_tags:
       Name: ansible_subnet_c
@@ -64,7 +64,7 @@
   ec2_vpc_subnet_facts:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     filters:
       "tag:Name": ansible_subnet_c
   register: ansible_subnet_c_id
@@ -81,10 +81,13 @@
   ec2_vpc_igw:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     vpc_id: "{{ vpc_net_fact_id.vpcs[0].id }}"
     state: present
   register: igw
+
+- debug:
+    var: igw
 
 ##route table
 ##作業マシン内にbotoが必要
@@ -92,7 +95,7 @@
   ec2_vpc_route_table:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     vpc_id: "{{ vpc_net_fact_id.vpcs[0].id }}"
     tags:
       Name: ansible-test

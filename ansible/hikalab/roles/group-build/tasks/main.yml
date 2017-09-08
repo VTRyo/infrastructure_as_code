@@ -4,9 +4,9 @@
   ec2_group:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
-    name: ansible-group
-    description: ansible for AWS
+    region: "{{ aws_region }}"
+    name: "ansible-group"
+    description: "ansible-group"
     vpc_id: "{{ vpc_net_fact_id.vpcs[0].id }}"
     state: present
     rules:
@@ -23,6 +23,8 @@
         to_port: 22
         cidr_ip: 12.0.0.0/16
   register: ansible-group
+##egressの指定をしなければallになる
+
 ##groupへのtagは2.4以降から
 ## http://docs.ansible.com/ansible/latest/ec2_group_module.html
 
@@ -31,7 +33,7 @@
   ec2_group_facts:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     filters:
       group-name: ansible-group
   register: group

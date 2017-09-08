@@ -4,10 +4,14 @@
   ec2:
     aws_access_key: "{{ aws_access_key_id }}"
     aws_secret_key: "{{ aws_secret_access_key }}"
-    region: "{{ AWS_REGION }}"
+    region: "{{ aws_region }}"
     key_name: id_rsa
     instance_type: t2.micro
     image: ami-4af5022c
+    wait: yes
+    group: "{{ group.security_groups[0].group_name }}"
+    vpc_subnet_id: "{{ ansible_subnet_a_id.subnets[0].id }}"
+    assign_public_ip: yes
     instance_tags:
       Name: "{{ instance_name }}"
     count_tag:
@@ -19,10 +23,20 @@
         volume_size: 8
   register: ec2
 
-# - name: allocate EIP
-#   ec2_eip:
-#     aws_access_key: "{{ aws_access_key_id }}"
-#     aws_secret_key: "{{ aws_secret_access_key }}"
-#     region: "{{ AWS_REGION }}"
-#     device_id: "{{ item }}"
-#     with_items: "{{ ec2.instance_ids }}"
+- debug:
+    var: ec2
+
+- name: launch wait for ec2
+  wait_for:
+    host: "{{ ec2.tagged_instances[0].public_ip }}"
+    timeout: 120
+
+##EIP
+##作業マシン内にbotoが必要
+- name: allocate EIP
+  ec2_eip:
+    aws_access_key: "{{ aws_access_key_id }}"
+    aws_secret_key: "{{ aws_secret_access_key }}"
+    region: "{{ aws_region }}"
+    state: present
+    device_id: "{{ ec2.tagged_instances[0].id }}"

@@ -4,3 +4,5 @@
     - vpc-build
     - group-build
     - ec2-build
+    # - change-instance
+    # - volume-up
