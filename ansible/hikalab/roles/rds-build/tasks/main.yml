@@ -1,8 +1,8 @@
 - name: create rds
   rds:
-    aws_access_key: "{{ AWS_ACCESS_KEY_TEST }}"
-    aws_secret_key: "{{ AWS_SECRET_TEST }}"
-    region: "{{ AWS_REGION_TEST }}"
+    aws_access_key: "{{ aws_access_key_id }}"
+    aws_secret_key: "{{ aws_secret_access_key }}"
+    region: "{{ AWS_REGION }}"
     command: create
     instance_name: test-ansible-rds
     db_engine: MySQL
