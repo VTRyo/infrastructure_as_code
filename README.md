@@ -1,4 +1,4 @@
-# Infrastracture as code
+# Infrastructure as code
 This project was created to share DevOps.
 Main of Ansible directory is infrastructure construction using "AWS module".<br>
 The Terraform directory is "Getting Started".
