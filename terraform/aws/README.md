@@ -1,6 +1,7 @@
 # Terraform入門
 
 このTerraformコードはサンプルです。AWSリソースを分割したファイルに記述しています。
+スライド資料はこちら(https://speakerdeck.com/vtryo)
 
 ## ディレクトリ構成
 * aws_ec2.tf <br>
