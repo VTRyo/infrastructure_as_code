@@ -1,0 +1,3 @@
+*.bk
+.vagrant
+.vagrant/*
