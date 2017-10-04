@@ -4,6 +4,8 @@
 
 ## 『[AWS構成管理]Terraformで実装できることをAnsibleAWSモジュールでどこまでできるか』で使用したソースコードです。
 
+* SpeackerDeckにて資料公開(https://speakerdeck.com/vtryo/hikarabo-awsgou-cheng-guan-li-terraformdeshi-zhuang-dekirukotowoansible-awsmoziyurudedokomadedekiruka)
+
 ### Ansibleとの比較検証で使用したTerraformの記事
 
 * [AWS][Terraform]EC2とVPCを自動化してみたら素晴らしかった<br>(https://blog.adachin.me/wordpress/archives/4693)
