@@ -1,0 +1,4 @@
+- hosts: hubot
+  become: True
+  roles:
+    - slack
