@@ -1,0 +1,6 @@
+- name: template your_name
+  template:
+    src: "template/{{ item.src }}"
+    dest: "/home/inaba/{{ item.dest }}"
+  with_items:
+    - { src: your_name.yml, dest: .  }
