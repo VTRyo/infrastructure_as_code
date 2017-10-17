@@ -1,4 +1,12 @@
 - hosts: hubot
+  vars_prompt:
+    - name: your_name
+      prompt: "君の名は?："
+      default: Ryo
+      private: no
+  #register: your_name
   become: True
   roles:
     - slack
+    - input-test
+  
