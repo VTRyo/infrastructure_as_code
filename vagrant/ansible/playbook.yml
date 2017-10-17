@@ -4,7 +4,10 @@
       prompt: "君の名は?："
       default: Ryo
       private: no
-  #register: your_name
+    - name: your_age
+      prompt: "あなたは何歳?"
+      default: 24
+      private: no
   become: True
   roles:
     - slack
