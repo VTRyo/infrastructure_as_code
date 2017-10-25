@@ -1,0 +1,9 @@
+- name: install mysql repo
+  yum:
+    name: http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
+    state: present
+
+- name: install mysql
+  yum: name={{ item }} state=present enablerepo=mysql57-community,mysql-tools-community,mysql-connectors-community
+  with_items:
+    - mysql-server

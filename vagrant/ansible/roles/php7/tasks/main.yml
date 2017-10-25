@@ -1,0 +1,61 @@
+ name: install repo
+  yum: name={{ item }} state=present
+  with_items:
+    - "http://rpms.famillecollet.com/enterprise/remi-release-6.rpm"
+    - "https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm"
+
+- name: install libwebp
+  yum: name={{ item }} state=installed enablerepo=epel
+  with_items:
+    - libwebp
+
+- name: install libmcrypt
+  yum: name={{ item }} state=installed
+  with_items:
+    - libmcrypt
+    - libtool-ltdl
+    - libtidy
+    - libXpm
+    - libtiff
+    - gd-last
+    - autoconf
+    - automake
+    - enchant-aspell
+    - httpd
+
+- name: install php7.1
+  yum: name={{ item }} state=installed enablerepo=remi,remi-php71
+  with_items:
+    - php
+    - php-process
+    - php-mysqlnd
+    - php-pecl-mailparse
+    - php-json
+    - php-cli
+    - php-pdo
+    - php-fpm
+    - php-bcmath
+    - php-gd
+    - php-mcrypt
+    - php-pecl-apcu
+    - php-pecl-igbinary
+    - php-pear
+    - php-intl
+    - php-pecl-apcu-devel
+    - php-common
+    - php-mbstring
+    - php-xml
+    - php-devel
+    - php-pecl-apcu-bc
+    - php-pecl-redis
+    - php-opcache
+    - php-enchant
+
+- name: copy php.ini
+  copy:
+    src: "files/{{ item.src }}"
+    dest: "/etc/{{ item.dest }}"
+    owner: root
+    group: root
+  with_items:
+    - { src: php.ini, dest: . }
