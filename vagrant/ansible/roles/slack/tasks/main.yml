@@ -1,6 +1,6 @@
 - name: send slack notification message
   slack:
-    token: xxxx/xxxx/xxxx
+    token: 
     msg: '"{{ inventory_hostname }}" deployed'
-    channel: xxxxx
+    channel: 
     color: good
