@@ -1,0 +1,10 @@
+[webserver]
+#example.com
+13.112.198.69
+
+[prd:children]
+webserver
+
+[vtryo.me:children]
+prd
+#dev
