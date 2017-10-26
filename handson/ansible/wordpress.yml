@@ -1,9 +1,0 @@
-- hosts: webserver
-  become: True
-  roles:
-     - common
-     - h2o
-     - mysql
-     - php
-     - zabbix-agent
-     - cron
