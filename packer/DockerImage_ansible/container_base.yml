@@ -1,0 +1,11 @@
+- hosts: all
+  #connection: docker
+  tasks:
+    - name: yum update
+      yum: name="*" state=latest
+
+    - name: install package
+      yum: name={{ item }} state=present
+      with_items:
+        - httpd
+        - php

@@ -1,0 +1,18 @@
+{
+  "builders": [{
+      "type": "docker",
+      "image": "centos:7",
+      "export_path": "image.tar"
+    }],
+
+  "provisioners":[{
+      "type": "ansible",
+      "playbook_file": "container_base.yml"
+    }],
+ 
+ "post-processors": [{
+      "type": "docker-import",
+      "repository": "ansible-dockerimage",
+      "tag": "0.3.0"
+    }]
+}
