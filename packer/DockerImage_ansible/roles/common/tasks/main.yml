@@ -1,0 +1,31 @@
+- name: yum update
+  yum: name="*" state=latest
+
+- name: epel install
+  yum: name={{ item }} state=present
+  with_items:
+    - epel-release
+
+- name: install package
+  yum: name={{ item }} state=present enablerepo=epel
+  with_items:
+    - vim
+    - git
+    - bash-completion
+    - tree
+    - mlocate
+    - telnet
+    - man
+    - graphviz
+    - graphviz-devel
+    - graphviz-gd
+    - patch
+    - mod_ssl
+    - gcc
+
+- name: update package
+  yum: name={{ item }} state=latest
+  with_items:
+    - libcurl
+    - curl
+    - nss
